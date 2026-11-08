@@ -13,7 +13,7 @@ FloatArray = NDArray[np.float64]
 
 
 @dataclass(frozen=True)
-class MMAConfig:
+class MMAOptions:
     """Numerical settings for the MMA outer iteration."""
 
     move_limit: float | None = None
@@ -105,8 +105,8 @@ class MMA:
         Moving-asymptote and dual-solver settings.
     """
 
-    def __init__(self, config: MMAConfig | None = None) -> None:
-        self.config = config or MMAConfig()
+    def __init__(self, config: MMAOptions | None = None) -> None:
+        self.config = config or MMAOptions()
         self._previous_x: FloatArray | None = None
         self._previous_previous_x: FloatArray | None = None
         self._lower_asymptote: FloatArray | None = None
@@ -312,4 +312,4 @@ class MMA:
         self._upper_asymptote = upper.copy()
 
 
-__all__ = ["MMA", "MMAConfig", "MMAResult"]
+__all__ = ["MMA", "MMAOptions", "MMAResult"]

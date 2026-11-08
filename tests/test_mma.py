@@ -1,10 +1,10 @@
 import numpy as np
 
-from scitopt_mma import MMA, MMAConfig
+from mmapy import MMA, MMAOptions
 
 
 def test_mma_solves_a_linear_single_constraint_subproblem():
-    optimizer = MMA(MMAConfig(move_limit=0.4))
+    optimizer = MMA(MMAOptions(move_limit=0.4))
     result = optimizer.step(
         x=[0.8],
         objective=0.8,
@@ -22,7 +22,7 @@ def test_mma_solves_a_linear_single_constraint_subproblem():
 
 
 def test_mma_supports_multiple_inequality_constraints():
-    optimizer = MMA(MMAConfig(move_limit=0.4))
+    optimizer = MMA(MMAOptions(move_limit=0.4))
     result = optimizer.step(
         x=[0.8, 0.8],
         objective=1.6,
@@ -40,7 +40,7 @@ def test_mma_supports_multiple_inequality_constraints():
 
 
 def test_mma_converges_on_a_quadratic_problem_with_a_linear_constraint():
-    optimizer = MMA(MMAConfig(move_limit=0.2))
+    optimizer = MMA(MMAOptions(move_limit=0.2))
     x = np.array([0.8, 0.8])
     for _ in range(30):
         result = optimizer.step(
@@ -60,7 +60,7 @@ def test_mma_converges_on_a_quadratic_problem_with_a_linear_constraint():
 
 
 def test_mma_keeps_asymptote_history_and_reset_clears_it():
-    optimizer = MMA(MMAConfig(move_limit=0.2))
+    optimizer = MMA(MMAOptions(move_limit=0.2))
     args = dict(
         objective=0.0,
         objective_gradient=[-1.0],

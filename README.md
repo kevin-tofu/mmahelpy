@@ -1,28 +1,26 @@
-# Scitopt MMA
+# mmapy source package
 
-`scitopt-mma` is a small, stateful implementation of the Method of Moving
+`mmapy` is a small, stateful implementation of the Method of Moving
 Asymptotes (MMA). It solves a separable convex approximation at each call and
 retains the design and asymptote history for the next outer iteration.
-The distribution uses a Scikit-Topt-specific name because the `mmapy` name is
-already used by a different package on PyPI.
 
 The package is independent of finite-element and topology-optimization
 libraries. Supply objective and inequality-constraint values and gradients at
 the current point. Constraints use the convention `g(x) <= 0`.
 
-## Install
+## Use with Scikit-Topt
 
 ```bash
-pip install scitopt-mma
+pip install scikit-topt
 ```
 
 ## Example
 
 ```python
 import numpy as np
-from scitopt_mma import MMA, MMAConfig
+from mmapy import MMA, MMAOptions
 
-optimizer = MMA(MMAConfig(move_limit=0.2))
+optimizer = MMA(MMAOptions(move_limit=0.2))
 x = np.array([0.8, 0.8])
 lower = np.zeros(2)
 upper = np.ones(2)
@@ -55,10 +53,12 @@ problem. Multiple inequality constraints are supported.
 ## Development
 
 ```bash
-pip install -e '.[test]'
-pytest
+PYTHONPATH=src pytest
 ```
 
-This project is under active development; the first release focuses on
-continuous, differentiable problems with box bounds and inequality
-constraints.
+This source package is bundled into the Scikit-Topt wheel. Installing
+Scikit-Topt makes the `mmapy` module available without installing another
+distribution. `mmapy` provides the generic optimizer and numerical options;
+Scikit-Topt adapts its public `MMA_Config` to those options for topology
+optimization. The solver focuses on continuous, differentiable problems with
+box bounds and inequality constraints.
