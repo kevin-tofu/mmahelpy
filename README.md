@@ -61,3 +61,11 @@ used on PyPI. The installed import remains `mmapy`. Scikit-Topt depends on
 `mmahelpy` and adapts its public `MMA_Config` to the generic optimizer for
 topology optimization. The solver focuses on continuous, differentiable
 problems with box bounds and inequality constraints.
+
+## Release
+
+Update the version in `pyproject.toml`, create a matching GitHub release such
+as `v0.1.1`, and publish it. The workflow runs the test suite on Python
+3.10–3.13 before publishing to PyPI with Trusted Publishing. Configure the
+PyPI trusted publisher for repository `kevin-tofu/mmahelpy`, workflow
+`workflow.yml`, and environment `pypi` before creating a release.
