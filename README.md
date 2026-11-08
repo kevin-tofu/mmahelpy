@@ -8,10 +8,10 @@ The package is independent of finite-element and topology-optimization
 libraries. Supply objective and inequality-constraint values and gradients at
 the current point. Constraints use the convention `g(x) <= 0`.
 
-## Use with Scikit-Topt
+## Install
 
 ```bash
-pip install scikit-topt
+pip install mmahelpy
 ```
 
 ## Example
@@ -56,9 +56,8 @@ problem. Multiple inequality constraints are supported.
 PYTHONPATH=src pytest
 ```
 
-This source package is bundled into the Scikit-Topt wheel. Installing
-Scikit-Topt makes the `mmapy` module available without installing another
-distribution. `mmapy` provides the generic optimizer and numerical options;
-Scikit-Topt adapts its public `MMA_Config` to those options for topology
-optimization. The solver focuses on continuous, differentiable problems with
-box bounds and inequality constraints.
+The distribution is named `mmahelpy` because the `mmapy` name is already
+used on PyPI. The installed import remains `mmapy`. Scikit-Topt depends on
+`mmahelpy` and adapts its public `MMA_Config` to the generic optimizer for
+topology optimization. The solver focuses on continuous, differentiable
+problems with box bounds and inequality constraints.
