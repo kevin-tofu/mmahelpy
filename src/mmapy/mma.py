@@ -151,8 +151,13 @@ class MMA:
             raise ValueError("objective_gradient must have shape (n_variables,)")
         if xmin.shape != (n,) or xmax.shape != (n,):
             raise ValueError("bounds must broadcast to x")
-        if np.any(~np.isfinite(x0)) or np.any(~np.isfinite(df0)):
-            raise ValueError("x and objective_gradient must be finite")
+        if (
+            np.any(~np.isfinite(x0))
+            or np.any(~np.isfinite(df0))
+            or np.any(~np.isfinite(xmin))
+            or np.any(~np.isfinite(xmax))
+        ):
+            raise ValueError("x, gradients, and bounds must be finite")
         if np.any(~np.isfinite(g0)) or np.any(~np.isfinite(dg0)):
             raise ValueError("constraints and constraint_jacobian must be finite")
         if np.any(xmin >= xmax) or np.any(x0 < xmin) or np.any(x0 > xmax):
@@ -172,15 +177,21 @@ class MMA:
         span = xmax - xmin
         low, upp = self._moving_asymptotes(x0, span)
         move = cfg.move_limit if move_limit is None else move_limit
+        if move is None:
+            move_array = span
+        else:
+            move_array = np.broadcast_to(np.asarray(move, dtype=float), x0.shape)
+            if np.any(~np.isfinite(move_array)) or np.any(move_array <= 0.0):
+                raise ValueError("move_limit must contain finite positive values")
         alpha = np.maximum.reduce((
             xmin,
             low + 0.1 * (x0 - low),
-            x0 - (np.broadcast_to(move, x0.shape) if move is not None else span),
+            x0 - move_array,
         ))
         beta = np.minimum.reduce((
             xmax,
             upp - 0.1 * (upp - x0),
-            x0 + (np.broadcast_to(move, x0.shape) if move is not None else span),
+            x0 + move_array,
         ))
         if np.any(alpha >= beta):
             raise ValueError("MMA move limits leave no feasible step")
