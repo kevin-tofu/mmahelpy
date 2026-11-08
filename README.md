@@ -1,8 +1,10 @@
-# mmapy
+# Scitopt MMA
 
-`mmapy` is a small, stateful implementation of the Method of Moving
+`scitopt-mma` is a small, stateful implementation of the Method of Moving
 Asymptotes (MMA). It solves a separable convex approximation at each call and
 retains the design and asymptote history for the next outer iteration.
+The distribution uses a Scikit-Topt-specific name because the `mmapy` name is
+already used by a different package on PyPI.
 
 The package is independent of finite-element and topology-optimization
 libraries. Supply objective and inequality-constraint values and gradients at
@@ -11,14 +13,14 @@ the current point. Constraints use the convention `g(x) <= 0`.
 ## Install
 
 ```bash
-pip install mmapy
+pip install scitopt-mma
 ```
 
 ## Example
 
 ```python
 import numpy as np
-from mmapy import MMA, MMAConfig
+from scitopt_mma import MMA, MMAConfig
 
 optimizer = MMA(MMAConfig(move_limit=0.2))
 x = np.array([0.8, 0.8])

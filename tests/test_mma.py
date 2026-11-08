@@ -1,6 +1,6 @@
 import numpy as np
 
-from mmapy import MMA, MMAConfig
+from scitopt_mma import MMA, MMAConfig
 
 
 def test_mma_solves_a_linear_single_constraint_subproblem():
