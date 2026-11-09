@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mmahelpy"
-version = "0.1.0"
+version = "0.1.1"
 description = "A reusable Python implementation of the Method of Moving Asymptotes"
 readme = "README.md"
 requires-python = ">=3.10"
