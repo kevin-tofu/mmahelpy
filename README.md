@@ -1,6 +1,6 @@
-# mmapy source package
+# mmahelpy
 
-`mmapy` is a small, stateful implementation of the Method of Moving
+`mmahelpy` is a small, stateful implementation of the Method of Moving
 Asymptotes (MMA). It solves a separable convex approximation at each call and
 retains the design and asymptote history for the next outer iteration.
 
@@ -18,7 +18,7 @@ pip install mmahelpy
 
 ```python
 import numpy as np
-from mmapy import MMA, MMAOptions
+from mmahelpy import MMA, MMAOptions
 
 optimizer = MMA(MMAOptions(move_limit=0.2))
 x = np.array([0.8, 0.8])
@@ -56,8 +56,7 @@ problem. Multiple inequality constraints are supported.
 PYTHONPATH=src pytest
 ```
 
-The distribution is named `mmahelpy` because the `mmapy` name is already
-used on PyPI. The installed import remains `mmapy`. Scikit-Topt depends on
+Both the distribution and Python import are named `mmahelpy`. Scikit-Topt depends on
 `mmahelpy` and adapts its public `MMA_Config` to the generic optimizer for
 topology optimization. The solver focuses on continuous, differentiable
 problems with box bounds and inequality constraints.
